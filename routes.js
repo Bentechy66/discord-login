@@ -3,6 +3,17 @@ function checkAuth(req, res, next) {
     res.send('not logged in :(')
 }
 
+function checkInServer(data, serverName) {
+  for (var key in data.guilds) {
+    if (data.guilds.hasOwnProperty(key)) {
+      if (data.guilds[key]["name"] == serverName) {
+        return true
+      }
+    }
+  }
+  return false
+}
+
 module.exports = function(app, passport, scopes){
   app.get('/', passport.authenticate('discord', { scope: scopes }), function(req, res) {})
   app.get('/callback',
@@ -13,7 +24,10 @@ module.exports = function(app, passport, scopes){
       res.redirect('/')
   });
   app.get('/info', checkAuth, function(req, res) {
-      //console.log(req.user)
-      res.json(req.user)
+      if(checkInServer(req.user, "Werewolves")) {
+        res.send("You're logged in and in the werewolves server!")
+      } else {
+        res.send("You're not in the werewolves server! Join <a href='invite.here'>here.</a>")
+    }
   })
 }
