@@ -1,0 +1,27 @@
+{
+  "name": "login-discord",
+  "version": "0.0.1",
+  "description": "Logs you in with discord and checks if you are in a specified server",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-discord": "^0.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bentechy66/discord-login.git"
+  },
+  "author": "Ben",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bentechy66/discord-login/issues"
+  },
+  "homepage": "https://github.com/bentechy66/discord-login#readme"
+}
