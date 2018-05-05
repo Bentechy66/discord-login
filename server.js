@@ -30,28 +30,16 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+
 app.use(passport.initialize())
 app.use(passport.session())
-app.get('/', passport.authenticate('discord', { scope: scopes }), function(req, res) {})
-app.get('/callback',
-    passport.authenticate('discord', { failureRedirect: '/' }), function(req, res) { res.redirect('/info') } // auth success
-);
-app.get('/logout', function(req, res) {
-    req.logout()
-    res.redirect('/')
-});
-app.get('/info', checkAuth, function(req, res) {
-    //console.log(req.user)
-    res.json(req.user)
-});
+
+//Set up le routes
+require("./routes")(app, passport, scopes)
 
 
-function checkAuth(req, res, next) {
-    if (req.isAuthenticated()) return next()
-    res.send('not logged in :(')
-}
-
-
+//Start le server
 app.listen(5000, function (err) {
     if (err) return console.log(err)
     console.log('Listening at http://localhost:5000/')
