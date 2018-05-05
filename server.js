@@ -26,7 +26,7 @@ passport.use(new Strategy({
 }))
 
 app.use(session({
-    secret: 'keyboard cat',
+    secret: config.PassportSecret,
     resave: false,
     saveUninitialized: false
 }));
