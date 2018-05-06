@@ -14,6 +14,14 @@ function checkInServer(data, serverName) {
   return false
 }
 
+function getSrvCount(data) {
+  var srvCount = 0
+  for (var key in data.guilds) {
+    srvCount += 1
+  }
+  return srvCount
+}
+
 module.exports = function(app, passport, scopes){
   app.get('/auth/discord/init/', passport.authenticate('discord', { scope: scopes }), function(req, res) {})
   app.get('/', function(req, res) {
@@ -28,9 +36,9 @@ module.exports = function(app, passport, scopes){
   });
   app.get('/info', checkAuth, function(req, res) {
       if(checkInServer(req.user, "Werewolves")) {
-        res.send("You're logged in and in the werewolves server!")
+        res.send("You're logged in and in the werewolves server! You're currently in " + getSrvCount(req.user) + " servers.")
       } else {
-        res.send("You're not in the werewolves server! Join <a href='invite.here'>here.</a>")
+        res.send("You're not in the werewolves server! To use this tool, you must be. Join <a href='http://discord.io/werewolves'>here.</a>")
     }
   })
 }
