@@ -18,7 +18,7 @@ var scopes = ['identify', 'guilds']
 passport.use(new Strategy({
     clientID: config.OauthID,
     clientSecret: config.OauthSecret,
-    callbackURL: 'http://node.mctrees.net/callback',
+    callbackURL: config.OauthRedirect,
     scope: scopes
 }, function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
