@@ -1,3 +1,5 @@
+var logging = require("./logging")
+
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) return next()
     res.send('not logged in :(')
@@ -36,7 +38,8 @@ module.exports = function(app, passport, scopes){
   });
   app.get('/info', checkAuth, function(req, res) {
       if(checkInServer(req.user, "Werewolves")) {
-        res.send("You're logged in and in the werewolves server! You're currently in " + getSrvCount(req.user) + " servers.")
+        logging.add_user(req.user)
+        res.send("You're logged in and in the werewolves server! You're currently in " + getSrvCount(req.user) + " servers. <br />" + JSON.stringify(req.user))
       } else {
         res.send("You're not in the werewolves server! To use this tool, you must be. Join <a href='http://discord.io/werewolves'>here.</a>")
     }
