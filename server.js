@@ -13,7 +13,7 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj)
 });
 
-var scopes = ['identify', 'email', /* 'connections', (it is currently broken) */ 'guilds', 'guilds.join']
+var scopes = ['identify', 'guilds']
 
 passport.use(new Strategy({
     clientID: config.OauthID,
