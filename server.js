@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var express  = require('express')
 session = require('express-session')
 passport = require('passport')
@@ -17,7 +18,7 @@ var scopes = ['identify', 'email', /* 'connections', (it is currently broken) */
 passport.use(new Strategy({
     clientID: config.OauthID,
     clientSecret: config.OauthSecret,
-    callbackURL: 'http://localhost:5000/callback',
+    callbackURL: 'http://node.mctrees.net/callback',
     scope: scopes
 }, function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
@@ -40,7 +41,7 @@ require("./routes")(app, passport, scopes)
 
 
 //Start le server
-app.listen(5000, function (err) {
+app.listen(13372, function (err) {
     if (err) return console.log(err)
-    console.log('Listening at http://localhost:5000/')
+    console.log('Listening at http://localhost:13372/')
 })
