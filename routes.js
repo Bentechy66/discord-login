@@ -15,7 +15,10 @@ function checkInServer(data, serverName) {
 }
 
 module.exports = function(app, passport, scopes){
-  app.get('/', passport.authenticate('discord', { scope: scopes }), function(req, res) {})
+  app.get('/auth/discord/init/', passport.authenticate('discord', { scope: scopes }), function(req, res) {})
+  app.get('/', function(req, res) {
+    res.send("Hello! <a href='/auth/discord/init'>Click here</a> to login with Discord.")
+  })
   app.get('/callback',
       passport.authenticate('discord', { failureRedirect: '/' }), function(req, res) { res.redirect('/info') } // auth success
   );
